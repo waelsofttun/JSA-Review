@@ -1,0 +1,46 @@
+Naming the variables : 
+
+In JavaScript, variable names may consist of any sequence of letters (lower-case and upper-case), digits, underscore characters, and dollar signs, 
+but they must not start with a digit. There is a list of reserved words that cannot be used as variable names (look at the table below).
+
+JavaScript interpreter distinguishes between lower-case and upper-case letters, also in variable names, so names such as test, Test, or TEST will be treated as different.
+
+
+For the declarations, we use the keywords var or let for variables and const for constants
+
+var vs let
+The keyword var comes from the original JavaScript syntax, and the keyword let was introduced much later. 
+Therefore, you will find var more in older programs. Currently, it is highly recommended to use the word let for reasons .
+
+One of the basic differences in the use of var and let is that let prevents us from declaring another variable with the same name (an error is generated).
+no matter if let or var is used in the previous declaration. 
+Using var allows you to re-declare a variable, which can potentially lead to errors in the program execution.
+
+
+when you don't make declaration and use ( x= 5 ) it is okay for javascript but it can make problems for the scope 
+
+strict Mode :
+
+"use strict"; // force the interpreter to behave according to modern JavaScript standards
+height = 180; // -> Uncaught ReferenceError: height is not defined
+console.log(height);
+
+ JavaScript will not control what type of value we store in the variable
+
+JavaScript allows us to easily replace the greeting variable with a value whose type is different from the one originally stored there.
+JavaScript goes one step further and not only allows us to change the types of values kept in a variable, but it also performs their implicit conversion if necessary .
+counter = 100 ;
+greeting = "Hello!";
+greeting = greeting + counter;
+console.log(greeting); // -> Hello!100
+
+Constants : 
+const greeting = "Hello!";
+
+const greeting; // -> Uncaught SyntaxError: Missing initializer in const declaration
+greeting = "Hello!";
+
+const greeting = "Hello!";
+greeting = "Hi!"; // -> Uncaught TypeError: Assignment to constant variable.
+
+
