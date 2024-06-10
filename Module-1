@@ -1,0 +1,87 @@
+Module 1 : 
+JavaScript is an interpreted language
+
+JavaScript it is also a high-level language
+
+Most modern JavaScript engines use the Just In Time Compilation technique (JIT Compilation).
+This technique consists of compiling code fragments during the execution of the program (more than a single instruction) and allows you to increase its performance.
+
+client-side programming:
+The code to be executed is loaded together with the page in the browser, on the user's side, and the interpreter which is a part of the web browser allows for its execution.
+  
+javascript disadvantages : 
+
+ there is no point in using it to write programs that require advanced mathematical calculations or very high performance.
+ inconvenience is that since the code is not compiled, it goes into the browser in the same, or a very similar, form to what we wrote ourselves. 
+ Why is this a disadvantage? 
+ This is because everyone can see our solution in an easy-to-read form and use it (either fragments of it or even the whole of it) without our permission to write their own program.
+ Some help here may be code obfuscation, which consists of transforming our ready script into a slightly less readable form 
+(e.g. by generating short random names of variables and functions, eliminating end-of-line signs, and so on), 
+but the simple fact is that if somebody wants to steal our JavaScript code, there is very little we can do to stop them.
+
+  javascript advantages : 
+  very active and supportive community.
+  huge number of ready-to-use frameworks and libraries.
+  big players like Google, Facebook, and Mozilla actively support JavaScript tools and their development.
+  dynamic typing characteristic of JavaScript.
+  
+the most popular online envirments are the following:
+
+JSFiddle
+CodePen
+JsBin
+Plunker
+
+
+Depending on the level of sophistication, the complexity of the written project, or the environment for which we write our programs (client-side, server-side, mobile), other tools may also be needed.
+
+These will be, among others:
+
+package managers – enabling the management of libraries (containing ready-made solutions that we can use in our programs) or components of the development environment (e.g. npm or yarn)
+
+task runners and module bundlers – used, in simple terms, to automate the process of software development and merge the resulting code from many files and libraries (e.g. Grunt or Webpack)
+
+testing framework – allows for automatic testing of the correctness of our program in search of potential errors (e.g. Mocha, Jasmine, or Jest)
+
+security analyzers – as you can guess, used to control the security of our solution (e.g. Snyk, RetireJS, or OWASP Dependency Check)
+  
+
+Interpreter : 
+
+ It functions as a runtime environment for our program. It checks whether we have made any formal errors, 
+for example, making a typo in the name of a function or forgetting to close a parenthesis, and then it executes the program instruction by instruction. 
+
+A debugger :
+
+is a tool that allows you to slow down or even halt the execution of a program, run instructions step by step, and look at and analyze the state of the program at any given moment.
+
+  <script> tag
+
+Depending on the browser, we will find various tools there, but there will certainly be:
+
+the inspector – which will allow us, for example, to analyze the individual HTML elements of an open website;
+
+the JavaScript console – which firstly shows all the information about the errors, and secondly allows us to run single JavaScript commands in the context of the current page;
+
+the debugger – which, among other things, shows the current values of variables, and allows you to pause code execution in the indicated place and to perform step-by-step work (i.e. execute single instructions of the program).
+  
+HTML is read by the browser line by line, and script tags are executed right at the moment when the browser parses the <script> tag 
+(parsing for programming languages means a formal analysis of the code by a machine in order to understand its structure).
+  Usually <script> tags are inserted in the page header between the <head> and </head> tags, and we can insert many of them in a file
+  , for example, in order to include JavaScript code from different files. 
+  This behavior can be changed for external scripts pointed to by the "src" attribute by using the "defer" or "async" attributes.
+
+defer – means that the script should be executed after the whole page is loaded;
+async – means that the script will be executed immediately, but in parallel to parsing the rest of the page.
+
+about:blank in the address bar. This is a pseudo address that tells your browser to generate and load a minimal blank HTML page.
+
+
+
+We can pass several arguments to console.log separated by commas, e.g.:
+
+console.log("abc", "def", "ghi");
+
+A string can be concatenated using the + sign
+
+  
