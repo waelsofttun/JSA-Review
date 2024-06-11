@@ -5,7 +5,6 @@ but they must not start with a digit. There is a list of reserved words that can
 
 JavaScript interpreter distinguishes between lower-case and upper-case letters, also in variable names, so names such as test, Test, or TEST will be treated as different.
 
-
 For the declarations, we use the keywords var or let for variables and const for constants
 
 var vs let
@@ -25,7 +24,7 @@ strict Mode :
 height = 180; // -> Uncaught ReferenceError: height is not defined
 console.log(height);
 
- JavaScript will not control what type of value we store in the variable
+JavaScript will not control what type of value we store in the variable
 
 JavaScript allows us to easily replace the greeting variable with a value whose type is different from the one originally stored there.
 JavaScript goes one step further and not only allows us to change the types of values kept in a variable, but it also performs their implicit conversion if necessary .
@@ -43,4 +42,48 @@ greeting = "Hello!";
 const greeting = "Hello!";
 greeting = "Hi!"; // -> Uncaught TypeError: Assignment to constant variable.
 
+Scope : 
+the scope of a variable depends on where it is declared
+the scopes of variables (and constants) declared with let and const look slightly different than those declared with var.
+The first rule is simple. If we declare any variable or constant using let or const, respectively, outside the code blocks, they will be global.
+What happens if we declare something using let or const inside a block? This will create a local variable or constant. It will be visible only inside the block in which it was declared and in blocks that can optionally be nested in it.
+In the case of variable declarations using the keyword var, the situation is slightly different. The variable declared using it outside the blocks will, as in the case of let, be global, in other words, it will be visible everywhere. 
+If you declare it inside a block, then... well, it will usually turn out to be global again.
+The problem is that var ignores ordinary program blocks, treating them as if they do not exist. So in what situation can we declare a local variable using var? Only inside a function.
+
+Function  Declaration  : 
+
+function testFunction() {
+    console.log("Hello");
+    console.log("World");
+}
+
+If we declare a variable using the keyword var inside a function, its scope will be limited only to the inside of that function (it's a local scope).
+Variable shadowing :
+
+JavaScript allows for variable shadowing. What does that mean? It means that we can declare a global variable and a local variable of the same name.
+
+let counter = 100;
+console.log(counter); // -> 100
+{
+  let counter = 200;
+  console.log(counter); // -> 200
+}
+console.log(counter); // -> 100
+
+ the local variable declared in a more nested block will overshadow the local variable of the same name declared in the external block.
+
+Hoisting : 
+The JavaScript interpreter scans the program before running it, looking for errors in its syntax, among other things.
+It does one more thing on this occasion. It searches for all variable declarations and moves them to the beginning of
+the range in which they were declared (to the beginning of the program if they are global, to the beginning of the block 
+if it is a local let declaration, or to the beginning of the function if it is a local var declaration). 
+All this happens, of course, in the interpreter memory, and the changes are not visible in the code.
+var height = 180;
+console.log(height);  // -> 180
+console.log(weight);  // -> undefined
+var weight = 70;
+console.log(weight);  // -> 70
+Hoisting only concerns the declaration, not initialization.
+Hoisting unfortunately works a little differently with the let and const declarations.
 
