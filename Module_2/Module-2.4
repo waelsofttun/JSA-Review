@@ -1,0 +1,21 @@
+Single-line comments 
+// This is a single-line comment
+let x = 42; // This is also a single line comment, although the part before the double slash is proper code and will be executed
+// This line and the next one will be ignored
+// x = 8;
+console.log(x); // -> 42
+Multi-line comments :
+/*
+    This is a block
+    comment and it can
+    span multiple lines
+
+    So this code won't be executed
+    console.log("Hello, World!");
+*/
+
+let x /* because no better name */ = 42;
+console.log(x);
+
+There are tools that can automatically generate documentation from comments, as long as they are used according to the tools reference. An example of such a tool could be JSDoc. Placing comments in the code according to the format of this tool will make it possible to 
+generate a website containing detailed information about a project (e.g. descriptions of functions, their call parameters, returned values etc.).
