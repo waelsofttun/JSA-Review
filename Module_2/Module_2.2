@@ -115,3 +115,161 @@ A very convenient mechanism that was introduced to JavaScript in 2015 is string 
 
 let sentence = `${country} is located in ${continent}.`;
 console.log(sentence); // -> Malawi is located in Africa.
+
+A method is a special kind of function that belongs to an object. Objects are complex data types, which can consist of many values (stored in properties) and methods. If you want to call the method of an object, you write the name of the method after a dot. Does this remind you of something? This is exactly the notation you use when calling console.log. The console object has many other methods besides the log method, such as time and timeEnd (which can be used to measure time).
+let river = "Mekong";
+let character = river.charAt(2);
+console.log(character); // -> k
+
+After the operation is completed, the interpreter removes the temporary object. So from our point of view, it looks like we just called a method on a given primitive type.
+
+let str = "java script language";
+
+console.log(str.length); // -> 20
+console.log('test'.length); // -> 4
+
+console.log(str.charAt(0)); // -> 'j'
+console.log('abc'.charAt(1)); // -> 'b'
+
+console.log(str.slice(0, 4)); // -> 'java'
+console.log('test'.slice(1, 3)); // -> 'es'
+
+console.log(str.split(' ')); // -> ['java', 'script', 'language']
+console.log('192.168.1.1'.split('.'));  // -> ['192', '168', '1', '1']
+
+slice(beginIndex, [optional] endIndex): method, returns a new string that is created from the characters between beginIndex (included) and endIndex (excluded); if endIndex is omitted, then the new string is from beginIndex to the end of the string;
+
+split(separator, [optional] limit): method, splits the string into substrings whenever a separator is found in that string, and returns an array of those substrings (we will say a few words about arrays in a moment), while an optional limit limits the number of substrings added to the list.
+
+The undefined type has only one value: undefined. It’s the default value that all variables have after a declaration if no value is assigned to them. You can also assign the value undefined to any variable, but in general, this should be avoided, because if we need to mark a variable as not holding any meaningful value, we should use null.
+
+Console.log(typeof notDeclaredVar); // -> undefined
+The Symbol type is, well… complicated to say the least. And fortunately, not particularly useful to us.
+
+It’s a new primitive type that was added to JavaScript in 2015. It doesn't have any literal value, and can only be created using a special constructor function. Symbols are a form of identifier that are guaranteed to be unique.
+
+The null value is quite specific. The value itself is primitive, while the type to which it belongs is not a primitive type, such as Number or undefined. This is a separate category, associated with complex types, such as objects. The null value is used to indicate that the variable does not contain anything, and most often it is a variable that is intended to contain values of complex types.
+
+ autoboxing. If a dot appears after a literal representing a primitive type, or after a variable containing this type of data, the JavaScript interpreter tries to treat this value as an object and not a primitive. For this purpose, it converts the primitive to the corresponding object on the fly, which has the appropriate methods (i.e. it performs autoboxing).
+
+someResource = null;
+console.log(someResource); // -> null
+console.log(typeof someResource); // -> object
+
+
+Primitive construction functions
+
+Using literals is not the only way to create variables of the given primitive types. The second option is to make them using constructor functions. These types of functions are mainly used in JavaScript for object-oriented programming, which is outside the scope of our course. However, these few listed constructor functions can also be used to create primitives, not just objects (this is not a general feature, but only for the listed functions). The following functions will return primitives of a given type: Boolean, Number, BigInt, and String.
+
+Most of these functions can be called without any arguments. In such a situation:
+
+the function String will by default create and return an empty string – primitive "";
+the function Number will by default create and return the value 0;
+the function Boolean will by default create and return the value of false.
+
+The function BigInt, unlike other constructor functions, requires you to pass some initial value to it. This can be an integer number that will be converted to a BigInt (see examples).
+
+const str = String();
+const num = Number();
+const bool = Boolean();
+
+console.log(str); // ->
+console.log(num); // -> 0
+console.log(bool); // -> false
+
+const big1 = BigInt(42);
+console.log(big1); // -> 42n
+
+const big2 = BigInt();   // -> Uncaught TypeError: Cannot convert undefined to a BigInt
+
+
+But creating default values is not impressive at all. We can accomplish these using literals. So what do we use these functions for? Well, we use them in type conversions.
+Those functions also accept arguments in parentheses and (if possible) will convert them to a given type.
+const num = 42;
+
+const strFromNum1 = String(num);
+const strFromNum2 = String(8);
+const strFromBool = String(true);
+const numFromStr = Number("312");
+const boolFromNumber = Boolean(0);
+
+let str = "text";
+let strStr = String(str);
+console.log(`${typeof str} : ${str}`); // -> string : text
+console.log(`${typeof strStr} : ${strStr}`); // -> string : text
+
+let nr = 42;
+let strNr = String(nr);
+console.log(`${typeof nr} : ${nr}`); // -> number : 42
+console.log(`${typeof strNr} : ${strNr}`); // -> string : 42
+
+let bl = true;
+let strBl = String(bl);
+console.log(`${typeof bl} : ${bl}`); // -> boolean : true
+console.log(`${typeof strBl} : ${strBl}`); // -> string : true
+
+let bnr = 123n;
+let strBnr = String(bnr);
+console.log(`${typeof bnr} : ${bnr}`); // -> bigint : 123
+console.log(`${typeof strBnr} : ${strBnr}`); // -> string : 123
+
+let un = undefined;
+let strUn = String(un);
+console.log(`${typeof un} : ${un}`); // -> undefined : undefined
+console.log(`${typeof strUn} : ${strUn}`); // -> string : undefined
+
+let n = null;
+let strN = String(n);
+console.log(`${typeof n} : ${n}`); // -> object : null
+console.log(`${typeof strN} : ${strN}`); // -> string : null
+
+Conversion to Number : 
+However, the string can also contain numbers in hexadecimal, octal, and binary format. They must be preceded by 0x, 0o, or 0b respectively. For any string that cannot be converted to a special value, NaN (not a number) is returned. A BigInt can also be converted to a Number, but we need to remember that a BigInt can store much bigger values than a Number, so for large values, part of them can be truncated or end up being imprecise. The Boolean true is converted to 1, and false to 0 – this is common for many programming languages. An attempt to convert an undefined value will result in NaN, while null will be converted to 0.
+
+console.log(Number(42)); // -> 42
+console.log(Number("11")); // -> 11
+console.log(Number("0x11")); // -> 17
+console.log(Number("0o11")); // -> 9
+console.log(Number("0b11")); // -> 3
+console.log(Number("12e3")); //  -> 12000
+console.log(Number("Infinity"));// -> Infinity
+console.log(Number("text")); // -> NaN
+console.log(Number(14n)); // -> 14
+console.log(Number(123456789123456789123n)); // - >  123456789123
+console.log(Number(true)); // -> 1
+console.log(Number(false)); // -> 0
+console.log(Number(undefined)); //  -> NaN
+console.log(Number(null));// -> 0
+
+Conversion to Boolean : 
+
+console.log(Boolean(true)); // -> true
+console.log(Boolean(42)); // -> true
+console.log(Boolean(0)); // -> false
+console.log(Boolean(NaN)); // -> false
+console.log(Boolean("text")); // -> true
+console.log(Boolean("")); // -> false
+console.log(Boolean(undefined)); // -> false
+console.log(Boolean(null)); // -> false
+
+Conversion to BigInt : 
+
+console.log(BigInt(11)); // -> 11n
+console.log(BigInt(0x11)); // -> 17n
+console.log(BigInt(11e2)); // -> 1100n
+console.log(BigInt(true)); // -> 1n
+console.log(BigInt("11")); // -> 11n
+console.log(BigInt("0x11")); // -> 17n
+console.log(BigInt(null)); // -> Uncaught TypeError: Cannot convert null to a BigInt
+console.log(BigInt(undefined)); // -> Uncaught TypeError: Cannot convert undefined to a BigInt
+console.log(BigInt(NaN)); // -> Uncaught RangeError: The number NaN cannot be converted to a BigInt because it is not an integer
+
+Implicit Conversions : 
+
+const str1 = 42 + "1";
+console.log(str1);        // -> 421
+console.log(typeof str1); // -> string
+
+const str2 = 42 - "1";
+console.log(str2);        // -> 41
+console.log(typeof str2); // -> number
