@@ -1,0 +1,117 @@
+Data type and type casting
+the JavaScript language is weakly typed
+In JavaScript, data types are divided into primitive (or simple) and complex (or composite). 
+Among the primitive types, we can find numbers and strings of characters, while the complex types include, for example, arrays and objects.
+
+The difference between these data types is contained quite precisely in their names. The primitive types, well, are simply not complex. If you write a data of a primitive type into a variable, one particular value will be stored there. This value will be atomic, in other words, it will not be possible to extract components from it.
+Data of complex types, such as an array, will consist of many elements of primitive (not complex) types.
+
+Literals are a way of noting specific values (data) 
+console.log(1991); // -> 1991
+console.log("Alice"); // -> Alice
+
+The typeof operator just mentioned is unary (it takes only one argument) and informs us of the type of data indicated as a given argument
+(return a String )
+All possible returns ( array is an object)
+"undefined"
+"object"
+"boolean"
+"number"
+"bigint"
+"string"
+"symbol"
+"function"
+
+In JavaScript, there are six primitive (or simple) data types: Boolean, Number, BigInt, String, Symbol, and undefined. Additionally,
+the primitive null value is also treated as a separate type. 
+The primitive, as we have already said, is a type of data whose values are atomic. This means that the value is one, indivisible element.
+
+Booleans are also used as what is commonly referred to as a flag, 
+a variable that signals something that can be either present or absent, enabled or disabled, etc.
+
+Number
+This is the main numeric type in JavaScript that represents both real numbers (e.g. fractions) and integers. 
+let a = 10; // decimal - default 
+let b = 0x10; // hexadecimal 
+let c = 0o10; // octal 
+let d = 0b10; // binary 
+ 
+console.log(a); // -> 10 
+console.log(b); // -> 16 
+console.log(c); // -> 8 
+console.log(d); // -> 2 
+
+let x = 9e3;
+let y = 123e-5;
+console.log(x); // -> 9000
+console.log(y); // -> 0.00123
+
+In addition to regular numbers in JavaScript, we use three additional special values, which are: Infinity, -Infinity and NaN (not a number). The first two do not require any additional explanations – they are exactly what we know from mathematics. The last one, NaN, is not so much a numerical value as a notification that some arithmetic action (or mathematical function) 
+could not be performed because the argument is either not a number, or cannot be converted to a number.
+
+let a = 1 / 0;
+let b = -Infinity;
+
+console.log(a); // -> Infinity
+console.log(b); // -> -Infinity
+console.log(typeof a); // -> number
+console.log(typeof b); // -> number
+
+let s = "it's definitely not a number";
+let n = s * 10;
+console.log(n); // -> NaN
+console.log(typeof n); // -> number
+
+The BigInt type is not used too often. It allows us to write integers of virtually any length. For almost any normal numerical operations,
+the Number type is enough, but from time to time we need a type that can handle much bigger integers.
+
+We can use mathematical operations on BigInts in the same way as on Numbers, but there is a difference when dividing. As the BigInt is an integer type, the division result will always be rounded down to the nearest whole number.
+BigInt literals are numbers with the …n suffix.
+
+let big = 1234567890000000000000n;
+let big2 = 1n;
+
+console.log(big); // -> 1234567890000000000000n
+console.log(typeof big); // -> bigint
+
+console.log(big2); // -> 1n
+console.log(7n / 4n); // -> 1n
+
+
+You cannot use other types in arithmetic operations on BigInts, that is, 
+you cannot add a BigInt and a Number to each other (this will generate an error).
+let big3 = 1000n + 20; 
+// -> Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
+The BigInt does not have its own equivalent of Infinity or NaN values. In the case of the Number type, such values appear when dividing by 0 (Infinity result) or trying to perform an arithmetic action on a value that is not a number (NaN result). 
+In the case of the BigInt type, such actions will generate an error.
+
+let message1 = "The vessel 'Mars' called at the port.";
+let message2 = 'Cyclone "Cilida" to pass close to Mauritius.';
+
+Strings, like other primitives, are immutable, so when we want to change even one letter in a string, in reality, we create a new string.
+
+let message1 = 'The vessel \'Mars\' called at the port.';
+let message2 = "Cyclone \"Cilida\" to pass close to Mauritius.";
+
+console.log(message1); // -> The vessel 'Mars' called at the port.
+console.log(message2); // -> Cyclone "Cilida" to pass close to Mauritius.
+
+let path = "C:\\Windows";
+console.log(path); // -> C:\Windows
+
+Why is this happening? Seeing the arithmetic operators -, *, or \, the JavaScript interpreter tries to interpret the given values as numbers, or convert them into numbers. So if the character strings consists of digits, the automatic conversion will be successful and we will get the result of the arithmetic action as a Number type value. If the character string cannot be interpreted 
+as a number (and converted) we will get the NaN result. We will talk more about conversion in a moment.  
+let path = "C:\\Windows" - "Windows";
+console.log(path); // -> NaN
+
+let test = "100" - "10";
+console.log(test); // -> 90
+console.log(typeof test); // -> number
+
+The exception is the addition operation, which will not be treated as an arithmetic one, 
+but as an attempt to create a new string by combining two input strings.
+
+A very convenient mechanism that was introduced to JavaScript in 2015 is string interpolation
+
+let sentence = `${country} is located in ${continent}.`;
+console.log(sentence); // -> Malawi is located in Africa.
