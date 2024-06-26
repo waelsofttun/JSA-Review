@@ -1,0 +1,178 @@
+String operators : 
+The only operator in this group is the concatenation +. This operator will convert everything to a String if any of the operands is a String type. Finally, 
+it will create a new character string, attaching the right operand at the end of the left operand.
+
+let sentence = "Happy New ";
+sentence += "Year ";
+sentence += 10191;
+console.log(sentence); // -> Happy New Year 10191
+
+Comparison operators
+Comparison operators are used to check the equality or inequality of values. All comparison operators are binary, 
+and all of them return a logical value representing the result of the comparison, true or false.
+
+As with other operators, JavaScript will try to convert the values that are being compared if they are of different types.
+It makes sense to check equality, or which is greater, using numeric representation, and JavaScript will in most cases convert 
+types to a Number before comparison. There are two exceptions to this, strings and the identity (strict equality) operator. 
+Strings are compared char by char (precisely Unicode character by Unicode character using their values).
+
+To check if the operands are equal, we can use either the identity (strict equality) operator === or the equality operator ==
+The first is more restrictive, and in order to return true, the operands must be identical (i.e. they must be equal and of the same type).
+
+The equality operator requires that they are only equal, and their types are not compared. So if the operands are of different types, the interpreter will try to convert them to numbers, for example, false will convert to 0, true to 1,
+undefined to NaN, null to 0, 10n to 10 and "123" to 123, etc.
+console.log(undefined == false); // -> false
+console.log(NaN == NaN); // -> false
+
+There are also complementary operators to those just demonstrated – the nonidentity operator !== and the inequality operator !=. The first returns true if the operands are not identical, in other words, they are equal but of different types, 
+or they are simply different. The second returns true if the operands are different.
+
+Comparison operators - continued
+We also have operators that allow us to check if one of the operands is bigger than >, smaller than <, bigger than or equal to >=, and smaller than or equal to <=. These operators work on any type of operand, 
+but it makes sense to use them only on numbers or values that will convert correctly to numbers.
+
+By way of simplification, single characters of both strings are tested on the same positions. It is assumed that the values of the single characters correspond to their positions in the alphabet (the letter b has a higher value than the letter a).
+Upper-case letters have lower values than lower-case letters, and digits have even lower values.
+
+typeof
+We already introduced the typeof operator when discussing data types. It is a unary operator, which checks the type of operand (it can be a variable or a literal). 
+The operator returns a string with the type name, such as "boolean" or "number".
+
+instanceof
+The instanceof operator appeared while discussing arrays. It is a binary operator that checks whether an object (left operand) 
+is of some type (right operand). Depending on the test result, it returns true or false.
+
+delete
+The unary delete operator was introduced while discussing objects. It allows you to delete a selected field of the object whose name is indicated with an operand.
+
+ternary
+
+console.log(true ? "Alice" : "Bob"); // -> Alice
+console.log(false ? "Alice" : "Bob"); // -> Bob
+let name = 1 > 2 ? "Alice" : "Bob";
+console.log(name); // -> Bob
+
+If we perform the same operations (or different operations but with the same precedence), the interpreter uses associativity to determine the order of operations. Operators may have a specified left-associativity (left to right order) or right-associativity (right to left order).
+Let's assume that in our example, the operator OP1 has left-associativity:
+
+Precedence	Operator	Associativity	Symbol
+14
+Grouping	
+n/a
+( … )
+13
+Field access	⇒	
+… . …
+12
+Function call	⇒	
+… ( … )
+11
+Postfix increment	
+n/a
+… ++
+Postfix decrement	
+n/a
+… --
+11
+Logical NOT	⇐	
+! …
+Unary plus	⇐	
++ …
+Unary negation	⇐	
+- …
+Prefix increment	⇐	
+++ …
+Prefix decrement	⇐	
+-- …
+typeof	⇐	
+typeof …
+delete	⇐	
+delete …
+9
+Exponentiation	⇐	
+… ** …
+8
+Multiplication	⇒	
+… * …
+Division	⇒	
+… / …
+Remainder	⇒	
+… % …
+7
+Addition	⇒	
+… + …
+Subtraction	⇒	
+… - …
+6
+Less than	⇒	
+… < …
+Less than or equal	⇒	
+… <= …
+Greater than	⇒	
+… > …
+Greater than or equal	⇒	
+… >= …
+instanceof	⇒	
+… instanceof …
+5
+Equality	⇒	
+… == …
+Inequality	⇒	
+… != …
+Strict Equality	⇒	
+… === …
+Strict Inequality	⇒	
+… !== …
+4
+Logical AND	⇒	
+… && …
+3
+Logical OR	⇒	
+… || …
+2
+Conditional (ternary)	⇐	
+… ? … : …
+
+
+1
+
+
+Assignment	⇐	
+… = …
+… += …
+… *= …
+
+… and other assignment operators
+
+Dialog boxes : 
+Alert dialog box
+Just like console.log, we can insert any value to the alert method and it will be converted to a string. The difference is that we can put an arbitrary number of parameters to console.log, whereas with the alert we must put only one (or zero, as it’s an optional parameter).
+
+The alert window will be visible until the user clicks the OK button visible on the popup. Code execution will be halted until the dialog box is closed.
+alert("Hello, World!")
+window.alert("Hello, World! for the second time");
+
+alert(4 * 7);
+alert(true);
+
+alert("text 1", "text 2"); // only "text 1" will be displayed
+Confirm dialog box : 
+The second dialog box is called the confirm dialog box. Like alert, it’s a method that accepts one optional parameter – a message that will be displayed. The difference between alert and confirm is that the confirm dialog box displays two buttons, the OK button and the Cancel button. Depending on the button pressed by the user, the confirm method returns a Boolean value. True is returned when the user closes the dialog box using the OK button, 
+and false is returned when the user presses the Cancel button.
+
+let remove = confirm("Remove all data?");
+let message = remove ? "Deleting Data" : "Cancelled"
+
+console.log(message);
+
+Prompt dialog box :
+
+As with other dialog boxes, the prompt accepts an optional parameter as a message that will be displayed. The prompt also accepts a second optional parameter, which is the default value of the text field visible in the dialog window. 
+The same as confirm, the prompt method will return a result that is dependent on user input.
+the user closes the window with the OK button, anything in the text field will be returned from the prompt method as a string.
+If the dialog box is closed with the Cancel button, the method will return a null value.
+let name = window.prompt("What is your name?", "John Doe");
+name = name ? name : "anonymous";
+
+let age = prompt("Hello " + name + " how old are you?");
+alert(name + " is " + age + " years old");
