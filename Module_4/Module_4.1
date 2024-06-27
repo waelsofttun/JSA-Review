@@ -2,3 +2,34 @@ Conditional execution :
 if (condition) {
     block of code
 }
+if (condition) {
+  condition - true code
+} else {
+  condition - false code
+}
+
+if (conditions_1) {
+  code
+} else if (condition_2) {
+  code
+} else if (condition_3) {
+  code
+} else {
+  code
+}
+
+let start = confirm("Start?");
+start ? alert("Here we go!") : console.log("Aborted");
+
+switch (expression) {
+    case first_match:
+        code
+        break;
+    case second_match:
+        code
+        break;
+    default:  
+        code
+}
+
+The evaluation itself is made with a strict comparison operator (===)
