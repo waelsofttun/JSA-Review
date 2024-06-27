@@ -1,0 +1,31 @@
+let n = 0;
+while(n < 91) {
+    console.log(n); // -> 0, 10, 20, 30, 40, 50, 60, 70, 80, 90
+    n += 10;
+}
+
+do {
+    code block
+} while(condition);
+
+for (initialization; condition; increment) {
+    block of code
+}
+
+loop initialization statement;
+loop condition statement;
+loop increment statement.
+
+The for loop initialization statement
+The initialization statement is executed only once, before the first loop iteration. Usually, it’s used to initialize (or declare and initialize) a variable that will be used as a loop counter. We can use any existing variable as a counter, but in general it’s good practice to declare a new one, as this makes the code cleaner and easier to read and understand.
+The initialization statement is optional and can be left empty, except for ending with a semicolon.
+
+
+A condition statement is an expression that is evaluated to a Boolean before each loop iteration.
+The for loop increment statement : 
+and most of the time it’s used to increment (or decrement, depending on the need) a loop counter that is used in a condition statement.
+It can be any expression, not only incrementation/decrementation.
+
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
