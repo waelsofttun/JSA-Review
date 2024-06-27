@@ -29,3 +29,44 @@ It can be any expression, not only incrementation/decrementation.
 for (let i = 0; i < 10; i++) {
     console.log(i);
 }
+for (let i = 0; i < values.length; i++) {
+    console.log(values[i]); // -> 10, 30, 50, 100
+}
+
+for (let i = values.length - 1; i > 0; i--) {
+    console.log(values[i]); // -> 100, 50, 30, 10
+}
+
+for (let i = 0; i < values.length; i += 2) {
+    console.log(values[i]); // -> 10, 50
+
+////////////////////for … of ////////////////////
+In addition to the regular for loop, there are two specific versions, one of which, for ... of, is dedicated for use with arrays (and other iterative structures, which are however beyond the scope of this course). In a loop of this type, we do not explicitly specify any conditions or number of iterations, as it is performed exactly as many times as there are elements in the indicated array.
+
+let values = [10, 30, 50, 100];
+let sum = 0;
+for (let number of values) {
+    sum += number;
+}
+console.log(sum); // -> 190
+
+/////////////////////// For in //////////////////
+There is also a version of the for loop that enables us to walk through object fields. This is a for ... in construction. It iterates through all fields of the indicated object
+let user = {
+    name: "Calvin",
+    surname: "Hart",
+    age: 66,
+    email: "CalvinMHart@teleworm.us"
+};
+
+for (let key in user) {
+    console.log(key); // -> name, surname, age, email
+};
+
+ In order to get access to the specified field, we use dot notation (the part of the course dedicated to data types) that is, after the name of the object, we write a dot and the field name (key). The key given in this notation is always treated as a literal. In the for ... in loop, this approach will not work, because the field name (key) is placed in a variable. Fortunately, we have an alternative solution, bracket notation. It allows you to refer to the selected object field using brackets (like in arrays). In the square bracket behind the object name, we place the field name, which can be either a literal or a variable containing that name.
+
+for (let key in user) {
+    console.log('${key} -> ${user[key]}');
+};
+
+ 
