@@ -74,3 +74,34 @@ for (let key in user) {
  The break statement is used to terminate the execution of a loop or a switch statement.
  In each of these contexts, whenever the JavaScript engine encounters a break statement, 
  it exits the whole loop or switch statement . 
+
+continue can be used in loops (but not in the switch statement). When used, it applies to the closest surrounding loop. The continue statement, in contrast to break, does not end the whole loop, but rather starts the next iteration of this loop. We can think of it as jumping right to the end of the current iteration.
+
+break is so important in the switch case
+In the example, the break keyword is present in all cases except in the default case. In contrast to if statements, switch statements do not execute just one branch, but rather they execute the entire code from the first case that matches until the end of the switch statement. This behavior is called pass-through and has some uses
+The fall-through can be useful when more than one case should end with exactly the same behavior.
+
+switch (gate) {
+    case "a":
+    case "A":
+    case 1:
+    case "1":
+        alert("Gate A: empty");
+        break;
+    case "b":
+    case "B":
+    case 2:
+    case "2":
+        alert("Gate B: main prize");
+        win = true;
+        break;
+    case "c":
+    case "C":
+    case 3:
+    case "3":
+        alert("Gate C: empty");
+        break;
+    default:
+        alert("No gate " + String(gate));
+}
+
