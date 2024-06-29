@@ -1,0 +1,58 @@
+Declaring functions : 
+function functionName() {
+   code
+}
+, functions are declared before they are called, mostly at the beginning of the code. However, this is only a good practice,
+which increases the readability of the code, not a JavaScript syntax requirement. Function declarations are automatically moved to the top of the scope, 
+so we can use them before the declaration, as long as they are in the scope.
+
+
+In general, we should strive to keep the function code as separate from the surrounding context as possible, among other things by not using global variables inside it. 
+
+The return statement : 
+What exactly is return for?
+
+First, it causes the function to end exactly where this word occurs, even if there are further instructions.
+Second, it allows us to return a given value from inside the function to the place where it was called.
+
+function showMsg() {
+    console.log("message 1");
+    return;
+    console.log("message 2");
+}
+
+showMsg(); // -> message 1
+
+Parameters
+
+When such a function is called, the values (literals, variables, function calls) should be placed in parentheses after its name, and are treated as parameters inside the function. 
+Arguments, if there is more than one, are separated by commas and must be passed in the same order as the parameters we define in the function declaration.
+
+function add(first, second) {
+return first + second;
+}
+
+let result = add(5, 7));
+console.log(result); // -> 12
+
+You can pass any type of data as arguments to the function
+
+function getMeanTemp(temperatures) {
+let sum = 0;
+for (let i = 0; i < temperatures.length; i++) {
+sum += temperatures[i];
+}
+return sum / temperatures.length;
+}
+
+let day1 = [12, 12, 11, 11, 10, 9, 9, 10, 12, 13, 15, 18, 21, 24, 24, 23, 25, 25, 23, 21, 20, 19, 17, 16];
+console.log(`mean: ${getMeanTemp(day1)}`); // -> mean:
+ 16.666666666666668
+
+let day2 = [17, 16, 14, 12, 10, 10, 10, 11, 13, 14, 15, 17, 22, 27, 29, 29, 27, 26, 24, 21, 19, 18, 17, 16];
+console.log(`mean: ${getMeanTemp(day2)}`); // -> mean:
+ 18.083333333333332
+Shadowing
+As we mentioned earlier, the parameters are treated inside the function as local variables. And just like the local variables explicitly declared inside a function,
+they shadow the global variables of the same name (or more generally, variables from the outer scope). L
+ 
