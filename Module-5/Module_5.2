@@ -1,0 +1,125 @@
+Parameters validation : 
+function getMeanTemp(temperatures) {
+    if (!(temperatures instanceof Array)) {
+        return NaN;
+    }
+    let sum = 0;
+    for (let i = 0; i < temperatures.length; i++) {
+        sum += temperatures[i];
+    }
+    return sum / temperatures.length;
+}
+
+console.log(getMeanTemp(10));       // -> NaN
+console.log(getMeanTemp([10, 30])); // -> 20
+
+Recursion : 
+function factorial (n) {
+    return n > 1 ? n * factorial(n - 1) : 1;
+}
+
+console.log(factorial(6)); // -> 720
+Recursion is commonly used in programming. However, as with any solution, recursion must be handled with care. We shouldn't use it where we can't estimate the number of embedded calls. 
+We should also be very careful in formulating the condition that will interrupt the function sequence calls – errors can cause the program to suspend.
+
+Functions as first-class members : 
+In JavaScript, functions are first-class members. This term means that functions can be treated as any data, which can be stored in variables or passed as arguments to other functions. 
+For example, we can declare the showMessage function and then store it in the variable sm.
+
+function showMessage(message) {
+    console.log('Message: ${message}');
+}
+
+let sm = showMessage;
+
+sm("This works!"); // -> Message: This works!
+console.log(typeof sm); // -> function
+
+But it’s important to remember that when assigning a function to a variable, we don't use a function call operator, 
+as this would execute the function and assign the result of the function to a variable, and not to the function itself.
+
+This property is especially useful when passing the function as a call parameter to other functions, which we will soon learn more about. For now,
+let's test that something like this is actually feasible.
+
+function add(a, b) {
+    return a + b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function operation(func, first, second) {
+    return func(first, second);
+}
+
+console.log(operation(add, 10, 20)); // -> 30
+console.log(operation(multiply, 10, 20)); // -> 200
+////////////////////////////
+Function expressions : 
+
+We first declare the add function, and then store it in the variable myAdd. We can call the same function using both the name add and the variable myAdd. 
+We can shorten this notation and declare the function by storing it in a variable.
+this form of defining a function is called Named function expression.
+let myAdd = function add(a, b) {
+    return a + b;
+}
+
+console.log(myAdd(10, 20)); // -> 30
+console.log(add(10, 20)); // -> 30
+
+ anonymous function expression : 
+ 
+ This form of defining a function is called function expression. In this case, it is specifically a named function expression, because the function has a name (add). If there is a named function expression, there will probably also be an unnamed, 
+ or precisely, an anonymous function expression. In fact, simply remove the name following the function keyword to change the function from named to anonymous.
+
+ let myAdd = function(a, b) {
+    return a + b;
+}
+
+console.log(myAdd(10, 20)); // -> 30
+
+ This will be much more evident when passing a function as a call parameter to another function. Let's look at the example:
+ function operation(func, first, second) {
+    return func(first, second);
+}
+
+let myAdd = function(a, b) {
+    return a + b;
+}
+
+console.log(operation(myAdd, 10, 20)); // -> 30
+
+console.log(operation(function(a, b) {
+    return a * b;
+}, 10, 20)); // -> 200
+
+it may look like a completely useless mechanism, but in the real world, it is used very often.
+
+
+Callbacks : 
+
+Functions that are passed as arguments to other functions may seem quite exotic and not very helpful, but in fact, they are a very important part of programming.
+So important that they even get their own name. They are callback functions. 
+
+Synchronous callbacks :
+If you call a function, the instructions in it will be executed at the time of the call. If we pass another function to this function as an argument, 
+and we call it inside an outer function as well, then all instructions will keep their natural order.
+
+let inner = function() {
+    console.log('inner 1');
+}
+
+let outer = function(callback) {
+    console.log('outer 1');
+    callback();
+    console.log('outer 2');
+}
+
+console.log('test 1');
+outer(inner);
+console.log('test 2');
+
+Asynchronous callbacks : 
+
+
