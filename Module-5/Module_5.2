@@ -149,4 +149,23 @@ console.log('test 1');
 outer(inner);
 console.log('test 2');
 
-he setInterval function returns an identifier during the call, which can be used to remove the timer used in it (and consequently to stop the cyclical callback function call). We will do this in the next example. First, we run setInterval, which will call the callback function (i.e. the inner function) in one-second intervals. Then we call setTimeout, which will turn off the timer associated with the previously called setInterval after 5.5 seconds. As a result, the inner function should be called five times. In the meantime, the rest of the program will be executed ...
+the setInterval function returns an identifier during the call, which can be used to remove the timer used in it (and consequently to stop the cyclical callback function call). We will do this in the next example. First, we run setInterval, which will call the callback function (i.e. the inner function) in one-second intervals. Then we call setTimeout, which will turn off the timer associated with the previously called setInterval after 5.5 seconds. As a result, the inner function should be called five times. In the meantime, the rest of the program will be executed ...
+
+The window object has a method (or its own function) named addEventListener. This function allows you to register a certain action to be performed in response to a window-related event. Such an event can be a "click", which is a single mouse click on any place on the page (there is a limited set of named events associated with a particular object, to which it can react). The action to be taken is passed to the addEventListener method as a callback function.
+
+window.addEventListener("click", function() {
+    console.log("clicked!");
+});
+
+Arrow function :
+
+An arrow function is a shorter form of a function expression. An arrow function expression is composed of: parentheses containing zero to multiple parameters (if exactly one parameter is present, the parentheses can be omitted); an arrow that looks like this "=>"; and the body of the function, which can be surrounded by curly brackets if the body is longer. If an arrow function has only one statement and returns its value, we can omit the return keyword, as it will be implicitly added. For example, the function add, which we already know:
+
+let add = (a, b) => {
+    return a + b;
+}
+console.log(add(10, 20)); // -> 30
+/////If an arrow function has only one statement and returns its value
+let add = (a, b) => a + b;
+console.log(add(10, 20)); // -> 30
+
