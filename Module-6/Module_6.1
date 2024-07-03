@@ -1,0 +1,68 @@
+Errors types  :
+syntax error:
+let multiply = (a b) => a + b; // -> Uncaught SyntaxError: Unexpected identifier
+let result = multiply(10, 20);
+console.log(result);
+
+semantic error:
+let multipl = (a, b) => a + b;
+let result = multiply(10, 20); // -> Uncaught ReferenceError: multiply is not defined
+console.log(result);
+
+logical errors.
+
+The last two errors may look quite similar at first glance, but they describe two completely different situations. A logical error makes it possible to execute the instruction,
+but it will give the wrong result. An instruction with a semantic error will make no sense, 
+so most likely it will not be possible to execute it at all in this form.
+
+in JavaScript, semantic errors are run-time errors).
+
+ReferenceError :
+ It occurs when we try to access a function or a variable that doesn't exist. The JavaScript engine does not know the meaning of the given name
+ let a = b; // -> Uncaught ReferenceError: b is not defined
+ fun(); / -> Uncaught ReferenceError: fun is not defined
+
+ When JavaScript detects syntactic or semantic errors, it generates and throws specific objects containing information about the encountered error.
+  In the case of syntax errors, the JavaScript engine does not allow us to run the program, and on the console, we receive information about what is incorrect.
+   Errors other than syntax errors (e.g. semantic errors) are generally called run-time errors in JavaScript. They appear while the program is running. We can also call them exceptions. 
+   By default, thrown exceptions
+   interrupt program execution and cause the appropriate information to appear on the console (we observed this in our example with the multiply function). Let's generate the erroneous situation again:
+
+console.log('abc'); // -> abc
+conole.log('def'); // -> Uncaught ReferenceError: conole is not defined
+console.log('ghi');
+
+It is possible to prevent the program from stopping in such a situation. This is called exception handling (or more generally, error handling).
+To handle exceptions generated in JavaScript (as in many other languages) we use the try ... catch statement.
+try {
+    console.log('abc'); // -> abc
+    conole.log('abc');
+} catch (error) {  
+    console.log(error.message); // -> conole is not defined 
+}
+
+In JavaScript, not all erroneous situations throw exceptions. Many of them are handled in a slightly different way :
+
+console.log(100 / 0); // -> Infinity
+console.log(100 * "2"); // -> 200
+console.log(100 * "abc"); // -> NaN
+
+The conclusion is quite simple – if you are learning about a new function or operator,
+you have to check in the documentation (e.g. on the MDN page) how they behave in the case of errors. 
+Some of them will generate exceptions, while others will return some specific values. Depending on that, 
+you will be able to properly prepare yourself for handling errors using the try method or simple conditional instructions. 
+By the way, for the examples just shown, 
+the most sensible solution would be to check if the provided values really are numbers (remember the typeof operator?).
+
+Limited confidence : 
+. Do not believe the user or other systems. Predict what may go wrong, and check the data received before you use it in your program.
+let sX = prompt("Enter the first number");
+let sY = prompt("Enter the second number");
+let x = Number(sX);
+let y = Number(sY);
+if (Number.isFinite(x) && Number.isFinite(y) && y !== 0) {//false for NaN and Infinity values
+    console.log(x / y);
+} else {
+    console.log("incorrect arguments");
+}
+
