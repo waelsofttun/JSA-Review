@@ -1,0 +1,25 @@
+SyntaxError : 
+As we previously said, a SyntaxError appears when a code is ill-formed, when there are typos in the keywords, unmatching parentheses or brackets, etc. The code can’t even be executed.
+"use strict";
+iff (true) { //-> Uncaught SyntaxError: Unexpected token '{'
+    console.log("true");
+}
+ ReferenceError ( semantic error ) : 
+ let a = b; // -> Uncaught ReferenceError: b is not defined
+
+ TypeError : 
+ This type of error occurs when a certain value is not of the expected type (i.e. you try to perform an operation on it that is not acceptable).
+  Typical examples are changing the constant value or checking the length of a variable that is not a string. This error is particularly 
+  important when working with objects that are outside the scope of this course (we will talk about them in the next part of the course). This is a typical run-time error, 
+  so the appropriate exception will be thrown while the program is running, after reaching the problematic instruction.
+
+  RangeError : 
+  his type of error is generated when you pass a value to a function that is outside its acceptable range.    
+  Again, it is a run-time error
+  let testArray1 = Array(10);
+console.log(testArray1.length); // -> 10
+let testArray2 = Array(-1); // -> Uncaught RangeError: Invalid array length
+console.log(testArray2.length);
+
+There are a few more error types: EvalError, InternalError, and URIError, but they’re rather rare, and we’ll come back to them if needed.
+
