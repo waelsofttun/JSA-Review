@@ -59,3 +59,45 @@ the most important is that the finally block will be executed even when an error
 
 
 Try...catch...finally blocks can be nested, so we can use a whole try...catch block inside another try...catch block. This is useful when we expect multiple errors to occur and need to handle them all.
+
+
+The throw statement and custom errors : 
+
+To throw an exception, we use the throw instruction. It is followed by any value that will be treated as an exception. It can be, for example, a number, or one of the ready-made error objects (e.g. RangeError).
+
+An exception that we throw will cause the program to react in the same way as the original JavaScript exceptions (i.e. it will stop its execution). That is, unless we throw it inside the try block to handle it
+
+console.log("start"); // -> start
+throw 100 ; // -> Uncaught 100
+console.log("end");
+
+
+console.log("start"); // -> start
+try {
+    throw 100;
+} catch (error) {
+    console.log(error); // -> 100
+}
+console.log("end"); // -> end
+
+use of  ready-made error objects 
+
+
+Function factorial(n) {
+    if (n > 20) {
+        throw new RangeError("Max value 20");
+    }
+    let result = 1;
+    for (; n > 1; n--) {
+        result = result * n;
+    }
+    return result;
+}
+
+console.log(factorial(20)); // -> 2432902008176640000
+console.log(factorial(1000)); // -> Uncaught RangeError: Max value 20
+
+
+ The new object is initiated by the Max value 20 string. And such a new object, of the RangeError type, containing, among other things, the string we provided, will be thrown if the n parameter exceeds the allowed value.
+
+ 
