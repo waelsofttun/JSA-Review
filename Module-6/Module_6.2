@@ -23,3 +23,39 @@ console.log(testArray2.length);
 
 There are a few more error types: EvalError, InternalError, and URIError, but they’re rather rare, and we’ll come back to them if needed.
 
+The try ... catch statement : 
+
+try {
+    // code to try
+} catch (error) {
+    // code to run in case of an error, which throw an exception
+}
+
+Note that the catch keyword is followed by parentheses containing the parameter error. This is a variable name that will hold information about the error that was caught, and it can have any valid name, but the names error, err, or just e, are commonly used. In the case of an exception thrown by JavaScript, the error object will contain information about the error type, and is converted to a string to be logged or processed in any way the developer needs.
+
+Note that try...catch will not work on a SyntaxError
+
+Conditional exception handling : 
+Sometimes we want to be able to react differently to specific types of errors inside the catch block. We can do this by using the operator instanceof.
+If, for example, we receive an error in the catch block (passed as an error argument), we can check whether it is of the ReferenceError type as follows:
+let result = error instanceof ReferenceError;
+
+It’s important to know that any variable that gets declared using the let keyword inside a try block is not accessible in the catch block (nor in the finally block, 
+
+The finally statement : 
+
+try {
+    // code to try
+} finally {
+    // this will be always executed
+}
+
+The finally block can also be used together with the catch block, as both of them are optional, but at least one of them is required by the try statement, and if none of them is present, a SyntaxError is thrown.
+
+
+Why should we use a finally block?
+
+the most important is that the finally block will be executed even when an error is thrown from the catch block.
+
+
+Try...catch...finally blocks can be nested, so we can use a whole try...catch block inside another try...catch block. This is useful when we expect multiple errors to occur and need to handle them all.
