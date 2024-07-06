@@ -63,4 +63,12 @@ to execute separately) and Step Over (treating the function call as something in
 
  Locate the Step Over button (to the right of Resume, the arrow arcing over the dot)
 
- 
+ Call stack : 
+  the Call Stack. In a window with such a name, we can see what function we are currently in (in our case inner). What is more, we will see there all the functions that are currently active. The Call Stack is important in the case of nested functions, like in our example. Using Step Into, we call the outer function in the main program, step into it, and call the inner function. If we stop inside the inner function, then the active functions will be: inner and outer (creating a stack). At the very bottom of the stack, we will see the main function (it doesn't have a name, and in Firefox it is marked as (global), and in Chrome (anonymous)). This is the place from where the outer function is called.
+As a result of its execution, the name "inner" should be displayed (i.e. the contents of the local variable name of the inner function). If you click on the name of the outer function on the Call Stack, you will be taken to the context of that function (note that the selection of the current line has changed)
+
+console.log(name); // -> inner
+name = "new name";
+console.log(name); // -> new name
+
+As you can see, we have modified the value of the local variable name, which is located in the inner function. If we continue the program execution (Step or Resume), the program will use this new value.
