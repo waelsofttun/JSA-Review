@@ -1,0 +1,66 @@
+console.log("Before debugger");
+debugger;
+console.log("After debugger");
+
+When the debugger is invoked, execution is paused at the debugger statement. It is like a breakpoint in the script source.
+if the execution is not paused there is no debugger tool
+
+we should see information about code execution either stopped, or paused in the debugger, or in debug mode. The second log message is not displayed because the debugger statement works as a breakpoint in the code execution. So whenever JavaScript encounters the debugger statement, 
+it checks if the debugger is present, and if so, code execution is halted at that exact point. 
+
+So we know already that the debugger statement, when encountered by JavaScript, will stop code execution at that place. Depending on the browser we’re using, the flow control buttons can look different, and can be located in different places. 
+In general, all modern browsers support the following options to control the execution of the script in debug mode:
+
+Resume / Continue: This will resume the execution of the script in a normal way, and is used when we’ve checked what we wanted to check, 
+and now we want to continue with the execution of the script.
+
+Step Into:(one next and pause) This executes the next instruction in the code only, and pauses it again, and we use this when we want to analyze the code in detail, 
+or check which exact path the execution takes when complex branching is happening due to cascading if...else statements, or other complicated logic. If the next instruction is a function call, 
+using Step Into will jump inside the code of this function.
+
+Step Over: This works like Step Into, except that if this is used when the next instruction is a function call, 
+the code will not jump into the function code, but the whole function will be executed, and the program will be 
+paused again after jumping out of this function. This is often used when the next instruction is a call to a 
+function where we don’t know if it will have any impact, or we’re simply not interested in looking.
+
+Step Out. This allows us to immediately jump out of a function in which the code is paused.
+
+Ctrl + Shift + I.  : developer mode 
+ctrl + o : open file
+ctrl + r : reloade page
+
+------------------------------------
+console.log("before outer() call");
+debugger;
+console.log(outer());
+console.log("after outer() call");
+-------------------
+Do not forget to save the modified file. Go back to your browser and reload the page. What has happened? First of all, in the Developer Tools, the selected tab has changed: in Chrome, it will be to Sources, in Firefox to Debugger. The debugger statement causes the program to stop its execution on the line where we put it and wait for our decision. In the tab, among other information, you should see the code of our program,
+with the line on which the execution has stopped clearly highlighted.
+In Sources / Debugger view, we also have the option to use the console (we don't have to switch to the Console tab). Try pressing the Esc key several times.
+Notice that the console will appear and disappear at the bottom of the tab. For further work, leave it visible.
+
+To the right of the tab, locate the Resume button (the triangle icon rotated to the right – play). If you hover your mouse over this button, a tooltip should appear so that you can make sure it's the right button. Press this button, or use the keyboard shortcut F8. As a result, 
+the program will move on, and without stopping any more, it will execute to the end by itself
+
+Using Resume does not necessarily cause the program to execute to completion. We can indicate where it should stop again. Reload the page again. Notice that the debugger displays line numbers to the left of the code. Click on the number 15, indicating the last line in our code. This is how we set the breakpoint (the line will be highlighted). 
+Click on the line number again if you want to remove the breakpoint (do not delete it yet). 
+
+To be honest, when debugging code, we rarely use the debugger statement. Most often, at the place where the program should stop, we just indicate it using breakpoints set directly in the Developer Tools. Before further work, 
+remove the breakpoints (by clicking on the appropriate line numbers).
+
+
+How to deal without the debugger statement debugger ;  
+set breakpoints 
+Clicking Resume will cause the program to resume execution and stop at the second breakpoint.
+
+Apart from jumping between successive breakpoints with Resume, we have the possibility to perform a real step-by-step execution 
+(i.e. to call the instructions of our program one at a time). There is a small problem here. If an instruction is a call to a function, 
+should the debugger go inside the function and execute the instructions inside it step by step, or treat it as an indivisible whole and 
+just execute it? Of course, there is no one correct answer, and everything will depend on the specific situation and what we want to achieve.
+That is why debuggers distinguish between two modes of step execution: Step Into (treating the function as a set of instructions, which we want
+to execute separately) and Step Over (treating the function call as something indivisible).
+
+ Locate the Step Over button (to the right of Resume, the arrow arcing over the dot)
+
+ 
