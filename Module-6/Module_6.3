@@ -68,6 +68,9 @@ to execute separately) and Step Over (treating the function call as something in
 As a result of its execution, the name "inner" should be displayed (i.e. the contents of the local variable name of the inner function). If you click on the name of the outer function on the Call Stack, you will be taken to the context of that function (note that the selection of the current line has changed)
 
 console.log(name); // -> inner
+
+Viewing and modifying variables : 
+Above the Call Stack window is another window called Watch (Espion) (or Watch expressions). It allows us to view and modify the variables without using the console. In this window, we can find the + button, which after pressing, we can enter the name of the variable whose value changes we want to track. In order to change the current value of a variable, it is enough to double-click in the watch window on the observed variable, and enter the new value. Remember that during function calls or in code blocks, the scope of variable visibility may vary, so don't be surprised if the values of local variables are not visible in the global context.
 name = "new name";
 console.log(name); // -> new name
 
