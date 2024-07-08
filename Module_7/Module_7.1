@@ -1,0 +1,37 @@
+*****************Objects – What is an object?**********************
+
+Note that typeof returns the name of the data type as a string.
+arrays in JavaScript are also objects. In JavaScript, even functions are objects. In fact, everything in JavaScript, except a primitive, is an object.
+----An object as a different type of array-------
+A key is simply a label (a name), which is unique within an object and unambiguously defines the selected element.
+In objects, we call their component elements properties. Each property will consist of a key (or label) and a value.
+As we’ll see later in the course, JavaScript allows you to create objects in many different ways. The easiest way is to use curly brackets.
+literal notation == initializer notation 
+let sampleObject = {
+    id: 10, 
+    delay: 20,
+    name: "en to tre",
+    isPresent: true,
+    delay: 50
+};
+
+We can modify an object created in this way by, among other things, adding new properties.(dot notation)
+sampleObject.newkey= value
+
+The key is a string. When creating an object, the key can be enclosed in quotation marks, although this is not necessary 
+(JavaScript automatically interprets it as a string). However,this can be useful when you want to create a key consisting of several words. For example, 
+the following construction will be wrong:
+//error
+let contact = {
+	first name: "Ronald"
+};
+//correct
+let contact = {
+    "first name": "Ronald"
+};
+
+However, giving keys names consisting of many separate words is not the best idea.
+
+If you need a multi-word name, it’s better to use, for example, the Camel case notation, and write firstName instead of "first name". 
+The notation will be both more readable to the user and less burdensome on the computer. With multi-word keys, 
+it will also be a problem to refer to the property of an existing object – dot notation does not allow it.
