@@ -68,10 +68,31 @@ to execute separately) and Step Over (treating the function call as something in
 As a result of its execution, the name "inner" should be displayed (i.e. the contents of the local variable name of the inner function). If you click on the name of the outer function on the Call Stack, you will be taken to the context of that function (note that the selection of the current line has changed)
 
 console.log(name); // -> inner
-
-Viewing and modifying variables : 
-Above the Call Stack window is another window called Watch (Espion) (or Watch expressions). It allows us to view and modify the variables without using the console. In this window, we can find the + button, which after pressing, we can enter the name of the variable whose value changes we want to track. In order to change the current value of a variable, it is enough to double-click in the watch window on the observed variable, and enter the new value. Remember that during function calls or in code blocks, the scope of variable visibility may vary, so don't be surprised if the values of local variables are not visible in the global context.
 name = "new name";
 console.log(name); // -> new name
 
-As you can see, we have modified the value of the local variable name, which is located in the inner function. If we continue the program execution (Step or Resume), the program will use this new value.
+As you can see, we have modified the value of the local variable name, which is located in the inner function.
+If we continue the program execution (Step or Resume), the program will use this new value.
+
+Viewing and modifying variables : 
+Above the Call Stack window is another window called Watch (Espion) (or Watch expressions). It allows us to view and modify the variables without using the console. In this window, we can find the + button, which after pressing, we can enter the name of the variable whose value changes we want to track. In order to change the current value of a variable, it is enough to double-click in the watch window on the observed variable, and enter the new value. Remember that during function calls or in code blocks, the scope of variable visibility may vary, so don't be surprised if the values of local variables are not visible in the global context.
+
+
+Step out : 
+During debugging, it can be useful to use one more option. In the panel with the Resume, Step Over, or Step Into buttons, you will also find a Step Out button. 
+It resumes program operation by executing successive commands until the current function is exited to the function from which it was called.
+
+Measuring code execution time : 
+In the examples discussed so far in the course, speed has been of marginal importance. The programs were simple, they performed uncomplicated operations, and these operations were usually very few. In reality, however, the aspect of code execution speed is quite important. It is affected by many elements, such as the choice of an optimal algorithm for solving a given problem, the selection of appropriate functions, or the avoidance of redundant actions.
+
+
+One of the easiest ways to measure the speed of the program is to use the console.time and console.timeEnd methods, which allow us to make a precise measurement of the time between two specified places in our code, and display the result on the console
+
+console.time("Leibnitz")
+//code
+console.timeEnd("Leibnitz")
+
+The time is given in milliseconds. In the calls of the console.time and console.timeEnd methods, we can specify a string (in the example it is 'Leibnitz') that will identify our stopwatch in case we use many of them in our program.
+
+
+
