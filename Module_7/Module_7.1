@@ -42,4 +42,32 @@ The JavaScript engine uses a Garbage Collector, which decides for us whether the
 
 The JavaScript language doesn’t even provide for the possibility of explicitly deleting objects.
 
+**************Properties*********************
+---------Types : 
+As we mentioned earlier, we can assign primitive values to variables (e.g. number, Boolean, or string), complex values such as arrays or objects, and functions.
+let test = {
+nr: 10, 
+b: false, 
+str: "uno dos tres", 
+arr: [10, 20, 30], 
+obj: {
+x: 10, 
+y: 20
+}, 
+fn: function(arg) {console.log(arg)} 
+};
+
+test.fn(123);
+
+----------Nested properties : 
+If the property of an object is another object that has properties itself, then we are dealing with nested properties.
+Referring to such fields using dot notation is intuitive, and we simply add another dot and key (property name).
+console.log(test.obj.x);
+test.obj.y = 40;
+-----------A function as a property type – a method
+A function that is the property of an object will be called a method.
+Just as the properties of objects describe their characteristics, methods can be treated as their characteristic behavior, or ways of changing the state of an object.
+
+
+
 
