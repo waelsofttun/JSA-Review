@@ -319,3 +319,74 @@ radius: 100,
 
 call up => console.log(circle.getType());
 or  also  console.log(circle["getType"]() );
+
+
+
+-----use of properietis in methods
+let circle = {
+radius: 100,
+center: {
+	x: 0,
+    y:0
+},
+getType () {
+		return (typeof circle.radius === "number") ? 
+"circle" : "unknown" ;
+}
+};
+
+console.log(circle.getType());
+
+let figure = {...circle};
+delete circle.radius;
+console.log(figure.radius);
+console.log(figure.getType()); // "unknown"!
+
+But this way has a big flaw – so never, ever, ever use it! 
+
+The problem will become apparent when we make a copy of our circle object.
+
+let figure = {...circle};
+
+
+The method, which seems quite simple and logical, proves to be completely useless. So, what's the solution? A new keyword comes to the rescue – this.
+
+To give a simplified explanation, we can say that this one will always contain a reference to the object we are in. We’ll use it inside the methods to refer to the property of the object in which the method is located.
+
+let circle = {
+radius: 100,
+center: {
+	x: 0,
+    y:0
+},
+getType () {
+		return typeof this.radius === "number" ? "circle" : "unknown" ;
+}
+};
+
+console.log(circle.getType());
+let figure = {...circle};
+delete circle.radius;
+console.log(figure.radius);
+console.log(figure.getType()); // "circle"
+
+the keyword this is not only applicable to objects.
+
+let add = (a,b) => a + b;
+
+Arrow functions differ from ordinary functions not only in form. They contain inside themselves lexical scoping. Without going into detail, the method we would define in the form of an arrow will not have access to the properties of the object using this.
+
+We should not use arrow functions to declare object methods.
+
+
+this inside nested objects : 
+
+this is related to just nested object we cannot have access to parent data by this ( we use call argument insted of it )
+-------------------Getters and setters : 
+
+we declare them using the keywords set and get;
+the setter method must take exactly one argument;
+the getter method cannot accept any argument;
+these methods are seen as ordinary properties with the name of the method;
+setter and getter methods are not called as functions, they are used to assign a value to a property (setter) or to take a value from a property (getter)
+there may be a pair of setter and getter of the same name, and it will be treated as a property with read and write capabilities.
