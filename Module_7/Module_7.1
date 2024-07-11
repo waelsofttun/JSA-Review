@@ -254,3 +254,68 @@ let point0 = {x:10, y: 20 };
 let point2 = { ...point0};
 let point3 = { ...point0, z: 100};
 
+let point4 = { ...point3, ...{z: 200, color: "red"});
+Using them to copy, or to be more precise, clone a single object is just a special case of this.
+
+Shallow cloning does not copy nested objects, operating only on their references.
+
+let circle1 = {
+ 	radius: 100,
+ 	center: {
+	 	x: 100,
+ 	 	y: 100
+ 	}};
+
+let circle2 = Object.assign({},circle1)
+
+circle1.radius = 200;
+circle1.center.x = 200;
+console.log(circle2.radius);
+console.log(circle2.center.x);
+
+console.log(circle1 === circle2); // false
+console.log(circle1.center === circle2.center); // true !
+
+deep cloning 
+
+JavaScript does not have a built-in mechanism for this type of cloning
+example => 
+let deepClone = function(obj) {
+let newObj = {...obj};
+for(property in newObj) {
+    if(typeof newObj[property] === "object") {
+        newObj[property] = deepClone(newObj[property]);
+    }
+}
+return newObj;
+}
+
+----Methods
+
+delarations : 
+let circle = {
+    radius: 100,
+    center: {
+        x: 0,
+        y:0
+    },
+    getType: function() {
+        return "circle";
+    }
+};
+
+or also 
+let circle = {
+radius: 100,
+ center: {
+    x: 0,
+        y:0
+    },
+    getType () {
+        return "circle";
+    }
+};
+
+
+call up => console.log(circle.getType());
+or  also  console.log(circle["getType"]() );
