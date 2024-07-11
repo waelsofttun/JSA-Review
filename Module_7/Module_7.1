@@ -167,3 +167,90 @@ To get to the value of a given field, we use bracket notation (the key is dynami
 --------The Object.keys method 
 This method returns an array of property names, which we can use in any way we want.
 let keys = Object.keys(contact);
+---------------The const object can be modified;
+const contact = {};
+contact = { email: "RonaldSMurphy@freepost.org"}; // TypeError: Assignment to constant variable.
+const contact = {};
+
+contact.email = "RonaldSMurphy@freepost.org";
+console.log(contact.email);// RonaldSMurphy@freepost.org => no problem
+
+It turns out that not only is no exception generated, but the object is extended with a new field to which the value is assigned.
+
+This value can later be easily modified or deleted.
+
+According to JavaScript documentation, "a constant cannot change through re-assignment" and "a constant cannot be re-declared".
+
+In the case of complex types (i.e. arrays and objects) variables and constants (the var, let, const keywords) do not contain the entire object. They only contain the object reference. For the sake of simplicity, we can imagine the reference as an address indicating where the object is really stored.
+So, the const keyword protects only the reference, the address, from change. We cannot change the reference, e.g. by replacing the object (the new object has a different address). However, changes inside an object – adding a new property, changing a value, etc. – do not affect the reference.
+
+
+In the case of objects, const is designed to protect against a re-declaration or assignment of a new object.
+
+There are, of course, methods to protect objects, or more precisely their properties, from changes.
+
+These will be discussed in the chapter on property configuration.
+
+
+------------Comparing objects 
+
+As you probably expect, the result of the comparison will be false. The comparison concerns the references of two independent objects.
+
+var point1 = {x: 10, y: 20};
+var point2 = {x: 10, y: 20};
+
+console.log(point1 === point2);     // false (we are comparing adresses)
+
+let point3 = point1;
+
+console.log(point1 === point3);     // true
+
+point3.z = 40;
+
+console.log(point3.z);  // 40
+console.log(point1.z);  // 40
+console.log(point2.z);  // undefined
+
+
+Using a reference stored in point3, we modify the object by adding a z field to it. The change is visible in the point3 and point1 variables, because they contain references to the same object. On the other hand, point2 points to a different object, and the action taken on point3 has no effect on it.
+
+JavaScript does not have a ready-to-use mechanism to compare two objects by their properties (called deep comparison).
+---------------------------Coping objects (coping references (), cloning, merging)
+
+As we checked a moment ago, assigning an object from one variable to another only creates a copy of the reference. But what if we want to copy the contents of the object?
+
+We can use the Object.assign method for this. The method takes the target object as the first argument, to which the fields from other objects will be copied. The second and subsequent arguments (there is no limit to the number of objects) will be used as the source of the properties to be copied. If a property with the same name as the source object already exists in the target object, it will be overwritten with a new value (the target is overwritten with the source).
+
+let point0 = {x:10, y: 20 };
+let point1 = point0;    // copy reference
+let point2 = {};
+Object.assign(point2, point0);  //  copy properties into the new object
+
+console.log(point2.x);
+console.log(point2.y);
+console.log(point1 === point0); // true
+console.log(point1 === point2); // false
+
+let point3 = {};
+Object.assign(point3, point0, {z: 100});
+console.log(point3.z);
+
+var point4 = {};
+Object.assign(point4, point3, {z: 200, color: "red"});
+
+console.log(point4.z);  // 200
+
+As we indicated earlier, in this case, the value from the last, most right-handed argument "wins".
+
+The Object.assign function returns a reference to the target object that has been modified, so we can simplify our example by giving as the first argument (and without much thought) an empty object to which we assign the reference to a variable after completing the Object.assign method.
+
+
+let point0 = {x:10, y: 20 };
+let point2 = Object.assign({}, point0);
+let point3 = Object.assign({}, point0, {z: 100});
+
+A convenient alternative to Object.assign is to use the spread operator. There are some differences in the operation of both mechanisms, but they’re so subtle that we won’t bother with them at the moment.
+let point0 = {x:10, y: 20 };
+let point2 = { ...point0};
+let point3 = { ...point0, z: 100};
+
