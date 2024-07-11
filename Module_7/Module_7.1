@@ -114,3 +114,56 @@ his method is similar to referencing an array field, except that we don't give t
 
 contact.tel === contact["tel"];
 contact.email.work === contact["email"]["work"]
+Multi-word keys => use Bracket notation
+
+-----------------Computed keys
+However, bracket notation is more often used when operating on computed keys.
+
+It may happen that the property key we want to refer to will be calculated during the operation of the program, on the fly.
+
+In this case, dot notation will not allow us to combine the object name and calculated key (e.g. stored in a variable).
+let contact = {
+    email_1: "RonaldSMurphy@freepost.org",
+    email_2: "rsmurphy@briazz.com"
+};
+for(i=1; i<=2; i++) {
+    let key = "email_" + i;  //computed key
+    console.log(key);
+    console.log(contact[key]);
+
+---------------Property existence test and property enumeration
+If you try to read a non-existent property, the undefined value will be returned.
+
+JavaScript will behave the same if the field exists but has no value assigned to it.
+In most cases, it won’t matter to us whether a field does or does not exist, or simply has no value assigned to it.
+
+Both cases are handled in the same way, with a new value being assigned to the property (if the field does not exist, it will automatically be created).
+if(contact.notes) { // if different then undefined
+    console.log(contact.notes);
+}
+ This can have fatal consequences, especially for nested objects.
+ console.log(contact.notes); // -> undefined  program continue to work 
+ console.log(contact.email.private); // exception! (use try catch)
+ 
+The easiest way to protect yourself is to either use the try ... catch block, or simply check before calling if the object and required field exist:
+if(contact && contact.email) {
+    console.log(contact.email.private);
+}
+
+or 
+contact && contact.email && console.log(contact.email.private);
+
+-----------Existence test using "in"
+If the field exists, it’s returned true (even if the field has no set value).
+if("notes" in contact) { // if true
+    console.log(contact.notes);
+}
+------------Enumeration "for ... in"
+
+Using for ... in, we can go through the properties of an object (with some limitations, which we’ll talk about in the chapter on the configuration of properties).
+To get to the value of a given field, we use bracket notation (the key is dynamically calculated and placed in the variable, so we cannot use dot notation).
+
+
+--------The Object.keys method 
+This method returns an array of property names, which we can use in any way we want.
+let keys = Object.keys(contact);
