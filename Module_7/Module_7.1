@@ -68,6 +68,49 @@ test.obj.y = 40;
 A function that is the property of an object will be called a method.
 Just as the properties of objects describe their characteristics, methods can be treated as their characteristic behavior, or ways of changing the state of an object.
 
+let point = {
+x: 0,
+y: 0,
+moveHorizontally: function(distance) {
+    this.x = this.x + distance;
+},
+moveVertically: function(distance) {
+    this.y = this.y + distance;
+}
+}
 
+console.log(point.x);	// -> 0
+point.moveHorizontally(30);
+console.log(point.x);	// -> 30
 
+The method does not have to affect the state of the object, but this is essentially one of the main reasons for their use.
 
+----------------Adding a new property
+
+The changes concern not only the values stored in specific fields, but also all the properties that we can add or delete, and the type of data placed in them that we can change.
+
+let contact = {
+    tel: "207-662-5412",
+    email: "RonaldSMurphy@freepost.org"
+};
+contact.firstName = "Ronald";
+contact.lastName = "Murphy";
+console.log(contact.tel);   // -> 207-662-5412
+console.log(contact.firstName);     // -> Ronald
+
+By the way, try to display a non-existent property, such as a notes. Note that a non-existent property of an object is treated as undefined and not, for example, as null.(no referernce error)
+
+----------------Modifying a property
+
+By default, there are no restrictions on modifying the values placed in object properties (we’ll talk about non-writable properties in the chapter on configuring object properties).
+
+Thus, we can assign a new value of any type to an existing object property at any time – we are not limited by the previous value type.
+contact.email = ["RonaldSMurphy@freepost.org", "rsmurphy@briazz.com" ];
+
+-------------------Deleting a property
+delete contact.email.work;
+--------------------Dot notation vs. bracket notation
+his method is similar to referencing an array field, except that we don't give the index of an element, but instead we give its key. Remember, the key is a string!
+
+contact.tel === contact["tel"];
+contact.email.work === contact["email"]["work"]
