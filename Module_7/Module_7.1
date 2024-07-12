@@ -390,3 +390,134 @@ the getter method cannot accept any argument;
 these methods are seen as ordinary properties with the name of the method;
 setter and getter methods are not called as functions, they are used to assign a value to a property (setter) or to take a value from a property (getter)
 there may be a pair of setter and getter of the same name, and it will be treated as a property with read and write capabilities.
+
+let contact = {
+  	_tel: "207-662-5412",
+	get tel() {return this._tel;}
+};
+console.log(contact.tel);
+contact.tel = "100-100-1000"; // not worked 
+console.log(contact.tel);
+contact.email = "RonaldSMurphy@freepost.org";
+console.log(contact.email);
+
+In our object, we didn't define a tel setter, so an attempt to write into such a property will not succeed.
+
+What's more, since there is already a getter with this name, JavaScript will not allow us to create a new property with this name.
+
+For comparison, we see that an attempt to assign a value to a non-existent email field will create it and save the value.
+
+let contact = {
+    _tel: "207-662-5412",
+    get tel() {return this._tel;},
+    set tel(t) { this._tel = t;}
+
+};
+console.log(contact.tel);
+contact.tel = "100-100-1000";
+console.log(contact.tel);
+
+
+(( _ underscore used to protect properties ) if the property has a setter we can modifiy it )
+
+
+let contact = {
+    _age: 36,
+   firstName : "David",
+    lastName : "Taylor",
+    get fullName() {return `${this.firstName} ${ this.lastName}`;},
+    get age() { return this._age;},
+    set age(a) { if( a > 0) this._age = a;}
+
+};
+
+console.log(contact.fullName);
+contact.age = -20;
+console.log(contact.age);
+
+
+if we have a setter  assignment( = ) will execute setter 
+
+
+let contact = {
+	_age: 36,
+   firstName : "David",
+lastName : "Taylor",
+	get fullName() {return `${this.firstName} ${ this.lastName}`;},
+get age() { return this._age;},
+	set age(a) { if( a > 0) this._age = a;}
+};
+
+let keys = Object.keys(contact);
+console.log(keys); //[ '_age', 'firstName', 'lastName', 'fullName', 'age' ]
+
+
+let desc = Object.getOwnPropertyDescriptor(contact, "firstName");
+console.log(desc);
+
+This method allows us to retrieve information about the indicated property of the selected object.
+
+In our example, we check the firstName property of the contact object. The desc variable should be filled in by an object describing the attributes of this property.
+
+{
+value: "David", 
+writable: true, 
+enumerable: true, 
+configurable: true
+}
+
+As you can see, each property, apart from the name and value, has such attributes as writable, enumerable, and configurable. As you can guess, the configuration of properties will be set by manipulating these attributes.
+
+The exceptions are the setter and getter methods, which do not have writable fields in the configuration, but instead the get and set fields appear.
+
+We can set our own configuration of properties using the Object.defineProperty method.
+let contact = {};
+Object.defineProperty(contact, "_age", {
+    value: 36,
+    writable: true,
+    enumerable: false,
+    configurable: true
+});
+
+Object.keys(contact);
+console.log(contact._age);
+We have added the _age property to an empty contact object, marking it not to be enumerable. And it really isn't – calling Object.keys won't return it.
+
+Similarly, when executing for ... in, it will not be taken into account. However, the property exists, which we can check by displaying its value.
+To change the configuration of an existing property, we also use the Object.defineProperty method.
+Object.defineProperty(contact, "_age", {
+    value: contact._age,
+    writable: false,//read only
+    enumerable: false,
+    configurable: true
+});
+
+contact._age = 100;
+console.log(contact._age);//36
+
+Besides enumerable and writable, there is also an attribute called configurable in the configuration. Setting it to false will make it impossible to reconfigure the property or to delete it with the delete command.
+
+contact._age = 100;
+console.log(contact._age);//36
+delete contact._age
+console.log(contact._age);//36
+
+
+Object.keys and the for ... in loop operate only on properties that are enumerable.
+
+However, if we would like to retrieve all the fields without paying attention to their configuration, we can use the Object.getOwnPropertyNames method.
+
+let enumKeys = Object.keys(contact); // with enumerable check
+let allKeys = Object.getOwnPropertyNames(contact); // without cheking enumerable
+console.log(enumKeys);
+console.log(allKeys);
+
+**************Object configuration
+The following methods are used for this purpose, among others:
+
+Object.preventExtensions(obj) – after calling this method, we won't be able to add new properties to the object obj;
+Object.seal(obj) – does not allow the adding, removing, or reconfiguring of the properties of the object obj;
+Object.freeze(obj) – similar to Object.seal, but additionally makes it impossible to change the value of the property.
+We also have methods to check if the object configuration has been changed.
+
+And so, we can use these methods respectively: Object.isExtensible, Object.isSealed(obj) and Object.isFrozen(obj).
