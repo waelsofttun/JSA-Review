@@ -1,0 +1,40 @@
+A class is treated as a kind of template, on which we create objects (instances).
+When assigning values to properties or calling methods, we’re already working on objects and not on classes.
+
+One of the most important things that classes allow for is inheritance. Based on an existing class, we can create a new one, 
+which will contain the properties and methods of the base class.
+
+how do we implement inheritance without classes? In a slightly different form than that known as classes, we did it using prototypes,
+i.e. existing objects connected in an appropriate way to newly created objects.
+Hence the name – a prototype object model.
+
+The ECMA6 standard introduced classes into JavaScript as an alternative to prototypes and constructors. Both of these approaches can now be applied equivalently.
+
+
+let point = {x:0, y:0};
+let coloredPoint = {color: "red"};
+
+One of the properties that each object inherits is the __proto__ field. Let's see what happens when we use this field to connect our two objects.
+
+coloredPoint.__proto__ = point;
+
+ In normal programming, we absolutely do not use __proto__. Direct use of this field is considered obsolete, withdrawn from the standards, 
+ slow. Here, we use it only to learn the basics of prototyping step by step.
+
+The fact that we have access to it is therefore obvious. However, we try, successfully, to read the x field. What happens then? JavaScript does not find a field named x in the coloredPoint object and looks for it in the prototype.
+
+If it doesn't find it there, it looks for it in the prototype, and so on (hence the chain of prototypes).
+
+coloredPoint.x = 100;   // new property
+console.log(coloredPoint.x);
+console.log(point.x);
+console.log(Object.getOwnPropertyNames(coloredPoint));
+
+It turns out that when trying to write to such a property, JavaScript does not follow the chain of prototypes
+
+If it doesn’t find a property directly in the object, it creates it, and assigns a new value to it. This way, among other things, the properties of the prototype are protected (and the same prototype can be used by many different objects).
+
+point.y = 200;
+console.log(coloredPoint.y);
+console.log(point.y);
+The change is visible both at the level of the point object and the coloredPoint object, for which point is a prototype. Using the __proto__ property for prototypes is, as we wrote earlier, not recommended. To present alternatives, let’s use a slightly more elaborate scenario.
