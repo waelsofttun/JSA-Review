@@ -38,3 +38,98 @@ point.y = 200;
 console.log(coloredPoint.y);
 console.log(point.y);
 The change is visible both at the level of the point object and the coloredPoint object, for which point is a prototype. Using the __proto__ property for prototypes is, as we wrote earlier, not recommended. To present alternatives, let’s use a slightly more elaborate scenario.
+
+
+After finding the method in the prototype, it calls it. Only one thing may need to be explained.
+
+Look at the getType method declaration. Inside it, we refer to the type field using the word this.
+
+We explained earlier that this refers to the object in which we define the method. That was a bit of a simplification, but usually true. In fact, this refers to the object in the context of which a given function is called
+figure = {
+getType(){
+    return this.type ? this.type : "unknown";
+}
+};
+
+let circle = {
+type: "circle",
+center: {x:0, y:0 ,getType(){
+    return this.type ? this.type : "unknown";
+}},
+radius: 100
+};
+circle.__proto__ = figure;
+
+console.log(figure.getType());//unknown
+console.log(circle.getType());//circle   __prototype__ has same context of the object not like nested object
+console.log(circle.center.getType());//unknown
+
+****************What alternatives do we have if using __proto__ is not recommended?
+First, we can use the Object.setPrototypeOf and Object.getPrototypeOf methods.
+The first one allows us to associate the target object with the prototype object.
+The second one returns the prototype of the indicated object (in our example, the proto variable should refer to the figure object).
+
+Object.setPrototypeOf(circle, figure);
+let proto = Object.getPrototypeOf(circle);
+console.log(circle.getType());//circle
+
+
+-------Object.create
+
+let circle = Object.create(figure)
+circle.type = "circle";
+circle.center = {x:0, y:0},
+circle.radius = 100;
+console.log(circle.getType());//circle
+
+----------Constructor
+let Figure = function(){
+    this.getType = function() {
+        return this.type ? this.type : "unknown";
+    }
+};
+let figure = new Figure;
+
+Note that until now the prototype has been connected directly to the object. This time it’s different – we bind it to a function that will create objects.
+
+let Circle = function(center, radius){
+    this.type = "circle";
+    this.center = center;
+    this.radius = radius;
+};
+Circle.prototype = figure;
+
+let circle1 = new Circle({x:0, y:0}, 10);
+let circle2 = new Circle({x:100, y:100}, 100);
+
+let Triangle = function(v1, v2, v3) {
+    this.type = "triangle";
+    this.vertices = [ v1, v2, v3];
+};
+Triangle.prototype = figure;
+
+let triangle1 = new Triangle({x:0, y:0}, {x:50, y:50}, {x:10, y:100});
+
+console.log(circle1.getType());//circle
+console.log(triangle1.getType());//triangle
+
+If you decide to use prototypes, it’s definitely best to use a method based on constructors or Object.create.
+Let's do one more test, which will show us a very useful feature of prototypes. The prototype is an object, so we can modify it by adding new methods.
+Let's say we want to modify an object that is a Circle prototype. We don't have to refer directly to the figure, but we can do it in the following way:
+Circle.prototype.hi = function(){console.log("Hi!")};
+
+We’ve added the hi method to the prototype, whose only task is to display greetings to the console.
+
+We’ve modified the figure object, which is a prototype of the circle1, circle2, and triangle1 objects. What's important is that the hi method will be available not only for objects newly created with the Circle or Triangle constructors, 
+but for all existing objects, whose prototype is just figure.
+
+circle1.hi();//hi
+triangle1.hi();//hi
+figure.hi();//hi
+
+let testString = new String("unu doi trei");
+console.log(testString.length);
+String.prototype.hi = function(){console.log("Hi!")};
+console(string.hi());
+Adding the hi writing method to the String designer is not particularly useful, but it highlights some interesting possibilities. Note that after our changes, we can also make such a piece of code:
+console.log("abcd".hi());
