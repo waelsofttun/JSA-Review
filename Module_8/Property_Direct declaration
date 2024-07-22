@@ -1,0 +1,8 @@
+This requires some additional explanation, because the original class syntax introduced into JavaScript in ECMAScript 6 does not offer the possibility to explicitly declare properties inside the class body.
+We’ll discuss two methods of declaring a property: in the body of the constructor and methods, and an alternative, the new one, in the body of the class.
+
+Property definitions inside class methods : 
+When introducing classes into the JavaScript language, it was assumed that properties would be defined according to the needs inside the bodies of the constructor and methods.
+To be honest, it is not really a true declaration. We take advantage of the fact that if we try to store the value in a non-existent property, it will be created automatically.
+vehicle1.x=3;
+console.log(vehicle1.x)
